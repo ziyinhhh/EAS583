@@ -6,26 +6,26 @@ def pin_to_ipfs(data):
 	#YOUR CODE HERE
     # Convert dict to JSON and upload to IPFS
     files = {
-        'file': json.dumps(data)
+		'file': json.dumps(data)
     }
 
-    response = requests.post('https://ipfs.infura.io:5001/api/v0/add', files=files)
-    response.raise_for_status()  # raise error if failed
-    cid = response.json()['Hash']  # IPFS returns a hash field
+	response = requests.post('https://ipfs.infura.io:5001/api/v0/add', files=files)
+	response.raise_for_status()  # raise error if failed
+	cid = response.json()['Hash']  # IPFS returns a hash field
 
 	return cid
 
 def get_from_ipfs(cid,content_type="json"):
 	assert isinstance(cid,str), f"get_from_ipfs accepts a cid in the form of a string"
 	#YOUR CODE HERE	
-    url = f"https://ipfs.io/ipfs/{cid}"
-    response = requests.get(url)
-    response.raise_for_status()
+	url = f"https://ipfs.io/ipfs/{cid}"
+	response = requests.get(url)
+	response.raise_for_status()
 
-    if content_type == "json":
-        data = response.json()
-    else:
-        data = response.text
+	if content_type == "json":
+		data = response.json()
+	else:
+		data = response.text
 
 	assert isinstance(data,dict), f"get_from_ipfs should return a dict"
 	return data
