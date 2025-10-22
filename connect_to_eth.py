@@ -26,7 +26,7 @@ def connect_with_middleware(contract_json):
 
 	# TODO complete this method
 	# The first section will be the same as "connect_to_eth()" but with a BNB url
-	bnb_url = "https://bsc-dataseed.binance.org"
+	bnb_url = "https://data-seed-prebsc-1-s1.binance.org:8545"
 	w3 = Web3(HTTPProvider(bnb_url))
 	assert w3.is_connected(), f"Failed to connect to provider at {bnb_url}"
 
@@ -34,7 +34,7 @@ def connect_with_middleware(contract_json):
 	# create a contract object. Read more on the docs pages at https://web3py.readthedocs.io/en/stable/middleware.html
 	# and https://web3py.readthedocs.io/en/stable/web3.contract.html
 
-	w3.middleware_onion.inject(layer=0)
+	w3.middleware_onion.inject(ExtraDataToPOAMiddleware, layer=0)
 
 	assert w3.is_connected(), f"Failed to connect to provider at {bnb_url}"
 	
