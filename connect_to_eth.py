@@ -34,7 +34,7 @@ def connect_with_middleware(contract_json):
 	# create a contract object. Read more on the docs pages at https://web3py.readthedocs.io/en/stable/middleware.html
 	# and https://web3py.readthedocs.io/en/stable/web3.contract.html
 
-	w3.middleware_onion.inject(web3.middleware, layer=0)
+	w3.middleware_onion.inject()
 
 	assert w3.is_connected(), f"Failed to connect to provider at {bnb_url}"
 	
