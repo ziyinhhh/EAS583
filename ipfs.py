@@ -7,15 +7,20 @@ def pin_to_ipfs(data):
 	pinata_api_key = "a1e4fe819b94778b51f2"
 	pinata_secret_api_key = "6c1e037457d6bb60378b9b1828b6e783756486379b09cd1940b9d773afe5f6e9"
 	
-	files = {
-		'file': json.dumps(data)
-	}
-
-	response = requests.post('https://gateway.pinata.cloud/ipfs', 
-							 files=files,
-							 auth=(pinata_api_key, pinata_secret_api_key))
+	url = "https://api.pinata.cloud/pinning/pinJSONToIPFS"
+    
+	headers = {
+    	'pinata_api_key': pinata_api_key,
+    	'pinata_secret_api_key': pinata_secret_api_key,
+    	'Content-Type': 'application/json'
+    }
+	response = requests.post(
+		url,
+		json={"pinataContent": data},
+		headers=headers
+    )
 	response.raise_for_status() 
-	cid = response.json()['Hash'] 
+	cid = response.json()['IpfsHash'] 
 
 	return cid
 
