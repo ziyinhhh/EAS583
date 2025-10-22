@@ -9,7 +9,9 @@ def pin_to_ipfs(data):
 		'file': json.dumps(data)
 	}
 
-	response = requests.post('https://mainnet.infura.io/v3/4bd761f90a774ecca66524d05f44991e', files=files)
+	response = requests.post('https://ipfs.infura.io:5001/api/v0/add?pin=true', 
+							 files=files,
+							 auth=('4bd761f90a774ecca66524d05f44991e', 'AGo9af3SSIwlufZ0+Ts1vPE9kUhTMBrqM7Lzqf6gDFQiLF6tSTfG9A'))
 	response.raise_for_status() 
 	cid = response.json()['Hash'] 
 
